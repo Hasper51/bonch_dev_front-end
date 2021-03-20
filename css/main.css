@@ -82,3 +82,18 @@ video {
 .news__comment_add button:active {
     background-color: rgb(241, 136, 124);
 }
+
+.comment_block {
+    margin-top: 5px;
+    align-self:flex-start;
+    width:100%;
+    margin-right: 1.5em;
+    padding: 1em;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 5px;
+    word-wrap: break-word;
+} 
+.comment_body{
+    border-bottom: 1px solid rgba(241, 136, 124);
+}
