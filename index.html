@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="main.js" defer></script>
 </head>
 <body>
     <div class="wrapper">
@@ -17,17 +19,25 @@
         </p>
 
         <div class="news__comment_add">
-            <textarea name="text" id="add_comment" rows="5" placeholder="Ваш комментарий"></textarea>
-            <button onclick="addComment();">
+            <input class="" name="text" id="comment-name" placeholder="Ваше имя"></input>
+        </div>
+
+        <div class="news__comment_add">
+            <textarea name="text" id="comment-body" rows="5" placeholder="Ваш комментарий"></textarea>
+            <button class="btn btn-danger" id="comment-add">
                 Добавить
             </button>
         </div>
-        <div class="comment_block">
+        
+        <div class="d-flex w-100 justify-content-end">
+            <button type="button" id="time-sort" class="btn btn-outline-danger ">Сначала старые</button>
+        </div>
+        <div id='comment-field'>
             
         </div>
 
     </div>
-
-    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    
 </body>
 </html>
