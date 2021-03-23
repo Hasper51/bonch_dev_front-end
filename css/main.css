@@ -102,6 +102,7 @@ video {
     float: right;
     position:relative;
     display: inline-block;
+    min-height: 30px;
   }
 .dropdown-content {
     display: none;
@@ -123,4 +124,5 @@ video {
       background-color: #ddd;
       color: #dc3545;
 }
-  .show {display: block;}
+.show {display: block;}
+.unshow{display: none;}

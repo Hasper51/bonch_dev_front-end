@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () =>{
     
     document.getElementById('comment-add').onclick = function(){
         if (document.querySelector('#comment-add').innerHTML === 'Добавить'){
-            console.log('fsdf')
             let commentName = document.getElementById('comment-name');
             let commentBody = document.getElementById('comment-body');
             if (commentName.value != '' && commentBody.value != ''){
@@ -142,31 +141,27 @@ document.addEventListener('DOMContentLoaded', () =>{
             let commentBody = document.getElementById('comment-body');
             const btnAdd = document.querySelector('#comment-add');
             editCommentButton.forEach((btn,i) => {
+                
                 let editOneComment = function() {
                     btn.removeEventListener('click', editOneComment);
                     commentName.value = comments[i].name;
                     commentBody.value = comments[i].body;
                     btnAdd.innerHTML = 'Применить';
-                    let applyEdit  = function(){
-                    
-                        comments[i].name = commentName.value;
-                        comments[i].body = commentBody.value;
-                        comments[i].time = Math.floor(Date.now() / 1000);
-                        saveComments();
-                        showComments();
-                        btnAdd.innerHTML = 'Добавить'; 
-                        commentName.value = '';
-                        commentBody.value = '';
-                        updateMenus();
-                        
-                    }; 
-                    btnAdd.addEventListener('click', applyEdit ,{once: true} )   
-                    
+                    document.querySelectorAll('.context-menu').forEach(btn => btn.classList.add('unshow'));
+                    btnAdd.addEventListener('click', applyEdit ,{once: true}); 
                 };
+                let applyEdit  = function(){
+                    comments[i].name = commentName.value;
+                    comments[i].body = commentBody.value;
+                    comments[i].time = Math.floor(Date.now() / 1000);
+                    saveComments();
+                    showComments();
+                    btnAdd.innerHTML = 'Добавить'; 
+                    commentName.value = '';
+                    commentBody.value = '';
+                    updateMenus(); 
+                }; 
                 btn.addEventListener('click', editOneComment,{once: true});
-                //btn.removeEventListener('click', editOneComment);
-                console.log(i,btn)
-                
                 
             });
         }
