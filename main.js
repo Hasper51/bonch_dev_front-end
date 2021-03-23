@@ -142,11 +142,13 @@ document.addEventListener('DOMContentLoaded', () =>{
             let commentBody = document.getElementById('comment-body');
             const btnAdd = document.querySelector('#comment-add');
             editCommentButton.forEach((btn,i) => {
-                btn.addEventListener('click', () => {
+                let editOneComment = function() {
+                    btn.removeEventListener('click', editOneComment);
                     commentName.value = comments[i].name;
                     commentBody.value = comments[i].body;
-                    btnAdd.innerHTML = 'Применить'; 
-                    btnAdd.addEventListener('click', () => {
+                    btnAdd.innerHTML = 'Применить';
+                    let applyEdit  = function(){
+                    
                         comments[i].name = commentName.value;
                         comments[i].body = commentBody.value;
                         comments[i].time = Math.floor(Date.now() / 1000);
@@ -156,9 +158,16 @@ document.addEventListener('DOMContentLoaded', () =>{
                         commentName.value = '';
                         commentBody.value = '';
                         updateMenus();
-                    });    
+                        
+                    }; 
+                    btnAdd.addEventListener('click', applyEdit ,{once: true} )   
                     
-                });
+                };
+                btn.addEventListener('click', editOneComment,{once: true});
+                //btn.removeEventListener('click', editOneComment);
+                console.log(i,btn)
+                
+                
             });
         }
 
