@@ -1,5 +1,5 @@
 
-const dataFromMars = [
+const dataFromMarsArr = [
     {
     date: '1 июля 2020 г.',
     temperature: '-70,7 ° F',
@@ -13,58 +13,76 @@ const dataFromMars = [
     pressure: '765  ПА',
     },
 ]
-
-async function postData(data) {
-    try{
-        
+const cardBodyElems = document.querySelector('.card-place')
+function postData(data) {
         return new Promise((resolve, reject) => {
         setTimeout(() => {
             try{
-            
-            dataFromMars.push(data)
-            resolve('super')
+            dataFromMarsArr.push(data)
+            resolve()
             }catch(error){
-                alert('Ошибка отправки данных')
+                cardBodyElems.innerHTML='<h3>Ошибка отправки данных :(</h3>'
+                console.log(error)
             }
         }, 1500)
         
         })
-    }catch(error) {
-        console.log('=ERROR=', error)
-    } 
+    
 }
 
 (async function getData() {
-    await(postData())
-    dataFromMars.splice(-1,1)
-    const cardBodyElems = document.querySelectorAll('.card-body')
+    await postData(
+        {
+        date: '3 июля 2020 г.',
+        temperature: '-70,7 ° F',
+        windspeed: '11,5 миль/ч',
+        pressure: '766,9  ПА',
+        }
+    )
+    
+    
     setTimeout(() => {
         try{
-            dataFromMars.forEach((dataFromMars,i) => {
-                cardBodyElems[i].innerHTML=
+            cardBodyElems.innerHTML='';
+            dataFromMarsArr.forEach((dataFromMars) => {
+                
+                cardBodyElems.innerHTML+=
                 `
-                <h5 class="card-title">Данные о погоде с Марса</h5>
-                <p class="card-text">
-                    Дата: ${dataFromMars.date}
-                    <br>
-                    Температура: ${dataFromMars.temperature}
-                    <br>
-                    Скорость ветра: ${dataFromMars.windspeed} 
-                    <br>
-                    Давление: ${dataFromMars.pressure}
-                </p>
-                <a href="" class="clbtn btn btn-primary">Тык!</a>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Данные о погоде с Марса</h5>
+                            <p class="card-text">
+                                Дата: ${dataFromMars.date}
+                                <br>
+                                Температура: ${dataFromMars.temperature}
+                                <br>
+                                Скорость ветра: ${dataFromMars.windspeed} 
+                                <br>
+                                Давление: ${dataFromMars.pressure}
+                            </p>
+                            <a href="" class="clbtn btn btn-primary">Тык!</a>
+                        </div>
+                    </div>
+                </div>            
                 `
                 const clButton = document.querySelectorAll('.clbtn')
-                clButton[i].addEventListener('click', function(event){
-                    event.preventDefault()
-                    const {date, ...otherData} = dataFromMars
-                    console.log(date, otherData)
+        
+                clButton.forEach(function(elem,i){
+                    elem.addEventListener('click', function(event){
+                        event.preventDefault()
+                        const {date, ...otherData} = dataFromMarsArr[i]
+                        console.log(date, otherData)
+                    })
                 })
                 
+                
+                
             })
-        } catch(error) {
-            console.log('=Ошибка получения данных=', error)
+        } catch(error){
+            cardBodyElems.innerHTML='<h3>Ошибка получения данных :(</h3>'
+            console.log(error)
+            
         } 
         }, 1000)
             
@@ -77,10 +95,9 @@ async function postData(data) {
 
 postData(
     {
-    date: '3 июля 2020 г.',
+    date: '4 июля 2020 г.',
     temperature: '-70,7 ° F',
     windspeed: '11,5 миль/ч',
     pressure: '766,9  ПА',
     }
 )
-
